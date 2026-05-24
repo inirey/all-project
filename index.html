@@ -288,14 +288,19 @@
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
  <script src="https://pastebin.com/raw/4MTUMTK9"></script>
 
-<script>
-    <script src="https://pastebin.com/raw/4MTUMTK9"></script>
+    <script>
+        window.addEventListener('load', () => {
+            // Cek apakah token berhasil dimuat
+            if (typeof GITHUB_TOKEN === 'undefined') {
+                document.getElementById('loading').classList.add('hidden');
+                document.getElementById('error').classList.remove('hidden');
+                document.getElementById('error-text').textContent = "Gagal ambil Token dari Pastebin!";
+                return;
+            }
 
-<script>
-    window.addEventListener('load', () => {
-        // 2. BARU DI SINI TULIS USERNAME (aman) & AMBIL TOKENNYA
-        const GITHUB_USERNAME = "inirey"; 
-        const GITHUB_TOKEN = GITHUB_TOKEN; // ✅ Ambil otomatis dari Pastebin supaya tidak terdeteksi github, JANGAN DIISI URL!
+            // Token ambil dari atas
+            const GITHUB_USERNAME = "inirey"; 
+            const GITHUB_TOKEN = GITHUB_TOKEN; 
         
 
         const projectsContainer = document.getElementById('projects-container');
