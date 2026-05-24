@@ -287,9 +287,13 @@
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 
+    <!-- 🔗 PANGGIL FILE TERPISAH (Isi Token ada di sini) -->
+    <script src="config.js"></script>
+
     <script>
-        const GITHUB_USERNAME = "inirey"; 
-        const GITHUB_TOKEN = "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"; 
+        // ✅ DATA DIAMBIL DARI FILE config.js (TIDAK ADA DI SINI)
+        const GITHUB_USERNAME = GITHUB_CONFIG.USERNAME;
+        const GITHUB_TOKEN = GITHUB_CONFIG.TOKEN;
         
 
         const projectsContainer = document.getElementById('projects-container');
