@@ -9,7 +9,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    
     <script>
         tailwind.config = {
             theme: {
@@ -96,7 +95,9 @@
     </script>
     <style type="text/tailwindcss">
         @layer utilities {
-            .content-auto { content-visibility: auto; }
+            .content-auto {
+                content-visibility: auto;
+            }
             .line-clamp-2 {
                 display: -webkit-box;
                 -webkit-line-clamp: 2;
@@ -109,7 +110,9 @@
                 -webkit-box-orient: vertical;
                 overflow: hidden;
             }
-            .text-shadow-neon { text-shadow: 0 0 8px rgba(0, 240, 255, 0.6); }
+            .text-shadow-neon {
+                text-shadow: 0 0 8px rgba(0, 240, 255, 0.6);
+            }
             .border-glow {
                 position: relative;
                 border: 1px solid transparent;
@@ -118,7 +121,10 @@
             .border-glow::after {
                 content: '';
                 position: absolute;
-                top: 0; left: 0; right: 0; bottom: 0;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
                 border-radius: inherit;
                 padding: 1px;
                 background: linear-gradient(135deg, rgba(0,102,255,0.5), rgba(0,240,255,0.8), rgba(0,102,255,0.5));
@@ -134,7 +140,8 @@
             .avatar-ring {
                 position: relative;
             }
-            .avatar-ring::before, .avatar-ring::after {
+            .avatar-ring::before,
+            .avatar-ring::after {
                 content: '';
                 position: absolute;
                 inset: -4px;
@@ -154,25 +161,26 @@
             }
         }
 
-        ::-webkit-scrollbar { width: 10px; }
-        ::-webkit-scrollbar-track { background: #050A18; }
-        ::-webkit-scrollbar-thumb { 
-            background: linear-gradient(135deg, #0066FF, #00F0FF); 
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #050A18;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #0066FF, #00F0FF);
             border-radius: 10px;
             box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
         }
-
         body {
             background: #050A18;
-            background-image: 
-                radial-gradient(circle at 0% 0%, rgba(0, 102, 255, 0.15) 0%, transparent 40%),
-                radial-gradient(circle at 100% 0%, rgba(0, 240, 255, 0.1) 0%, transparent 40%),
-                radial-gradient(circle at 100% 100%, rgba(0, 102, 255, 0.15) 0%, transparent 40%),
-                radial-gradient(circle at 0% 100%, rgba(0, 240, 255, 0.1) 0%, transparent 40%);
+            background-image: radial-gradient(circle at 0% 0%, rgba(0, 102, 255, 0.15) 0%, transparent 40%), 
+                            radial-gradient(circle at 100% 0%, rgba(0, 240, 255, 0.1) 0%, transparent 40%), 
+                            radial-gradient(circle at 100% 100%, rgba(0, 102, 255, 0.15) 0%, transparent 40%), 
+                            radial-gradient(circle at 0% 100%, rgba(0, 240, 255, 0.1) 0%, transparent 40%);
             background-attachment: fixed;
             overflow-x: hidden;
         }
-
         .cursor-light {
             position: fixed;
             width: 400px;
@@ -210,7 +218,6 @@
                 <div class="absolute w-[600px] h-[600px] bg-primary/10 rounded-full blur-3xl -top-40 -left-40"></div>
                 <div class="absolute w-[600px] h-[600px] bg-accent/10 rounded-full blur-3xl -bottom-40 -right-40"></div>
             </div>
-            
             <div class="container mx-auto max-w-5xl relative">
                 <div class="bg-gradient-card backdrop-blur-2xl rounded-[30px] border-glow shadow-glow-lg p-8 md:p-10 flex flex-col md:flex-row items-center gap-8 md:gap-10 animate-scale-in">
                     <div class="avatar-ring relative">
@@ -219,12 +226,10 @@
                         </div>
                         <div class="absolute -inset-1 rounded-full bg-gradient-neon opacity-30 blur-md animate-pulse-slow"></div>
                     </div>
-
                     <div class="text-center md:text-left flex-1">
                         <h2 id="name" class="text-[clamp(1.8rem,4vw,2.8rem)] font-black text-white mb-2"></h2>
                         <a id="username" href="" target="_blank" class="text-lg text-accent hover:text-white transition-colors font-medium inline-block mb-4"></a>
                         <p id="bio" class="text-slate text-base md:text-lg line-clamp-3 mb-6 max-w-2xl mx-auto md:mx-0"></p>
-
                         <div class="flex flex-wrap justify-center md:justify-start gap-6 md:gap-8">
                             <div class="text-center group">
                                 <span class="block text-2xl font-bold text-primary group-hover:text-accent transition-colors" id="repos-count">0</span>
@@ -259,7 +264,7 @@
             </div>
         </section>
 
-        <main class="container mx-auto px-4 pb-24 relative z-10">
+        <section class="container mx-auto px-4 pb-24 relative z-10">
             <div id="loading" class="text-center py-20">
                 <div class="inline-block relative">
                     <div class="w-20 h-20 rounded-full absolute bg-gradient-neon opacity-30 blur-xl"></div>
@@ -272,222 +277,207 @@
                 <div class="w-24 h-24 rounded-full bg-red-500/10 flex items-center justify-center mx-auto mb-6 shadow-glow-sm">
                     <i class="fa fa-exclamation-triangle text-4xl"></i>
                 </div>
-                <p class="text-lg font-medium" id="error-text">Gagal memuat data. Batas permintaan API habis.</p>
+                <p class="text-lg font-medium" id="error-text">Gagal memuat data.</p>
             </div>
 
             <div id="projects-container" class="hidden grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10"></div>
-        </main>
+        </section>
     </main>
 
     <footer class="bg-dark2/60 backdrop-blur-2xl border-t border-dark3/50 py-10 relative z-10 shadow-glow-sm">
         <div class="container mx-auto px-4 text-center text-slate text-sm">
-            <p class="tracking-wider">© <span id="year"></span>Made With<span class="text-accent">❤</span> By <span class="text-primary">Rey</span></p>
+            <p class="tracking-wider">© <span id="year"></span> Made With <span class="text-accent">❤</span> By <span class="text-primary">Rey</span></p>
         </div>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
- <script src="https://pastebin.com/raw/4MTUMTK9"></script>
 
     <script>
-        window.addEventListener('load', () => {
-            // Cek apakah token berhasil dimuat
-            if (typeof GITHUB_TOKEN === 'undefined') {
-                document.getElementById('loading').classList.add('hidden');
-                document.getElementById('error').classList.remove('hidden');
-                document.getElementById('error-text').textContent = "Gagal ambil Token dari Pastebin!";
+        // ✅ SOLUSI: Ambil token pakai AllOrigins karena Pastebin blokir akses langsung
+        const PASTEBIN_RAW_URL = "https://pastebin.com/raw/4MTUMTK9"; // GANTI PASTE KAMU DISINI
+        const GITHUB_USERNAME = "inirey";
+
+        window.addEventListener('load', async () => {
+            const projectsContainer = document.getElementById('projects-container');
+            const loadingElement = document.getElementById('loading');
+            const errorElement = document.getElementById('error');
+            const profileSection = document.getElementById('profile-section');
+            const errorText = document.getElementById('error-text');
+            let GITHUB_TOKEN = "";
+
+            document.getElementById('year').textContent = new Date().getFullYear();
+
+            // Inisialisasi Partikel
+            particlesJS('particles-js', {
+                particles: {
+                    number: { value: 50, density: { enable: true, value_area: 800 } },
+                    color: { value: "#00F0FF" },
+                    shape: { type: "circle" },
+                    opacity: { value: 0.2, random: true },
+                    size: { value: 3, random: true },
+                    line_linked: { enable: true, distance: 150, color: "#0066FF", opacity: 0.1, width: 1 },
+                    move: { enable: true, speed: 1.2, direction: "none", random: false, straight: false, out_mode: "out", bounce: false }
+                },
+                interactivity: {
+                    detect_on: "canvas",
+                    events: { onhover: { enable: true, mode: "grab" }, onclick: { enable: false }, resize: true },
+                    modes: { grab: { distance: 140, line_linked: { opacity: 0.3 } } }
+                },
+                retina_detect: true
+            });
+
+            document.addEventListener('mousemove', (e) => {
+                const light = document.querySelector('.cursor-light');
+                light.style.left = e.pageX + 'px';
+                light.style.top = e.pageY + 'px';
+            });
+
+            function getLanguageColor(lang) {
+                if (!lang) return 'bg-lang-default';
+                lang = lang.toLowerCase();
+                const colorMap = {
+                    'javascript': 'bg-lang-js', 'typescript': 'bg-lang-ts', 'python': 'bg-lang-py',
+                    'html': 'bg-lang-html', 'css': 'bg-lang-css', 'php': 'bg-lang-php',
+                    'java': 'bg-lang-java', 'c': 'bg-lang-c', 'c++': 'bg-lang-cpp', 'c#': 'bg-lang-csharp',
+                    'go': 'bg-lang-go', 'ruby': 'bg-lang-ruby', 'swift': 'bg-lang-swift', 'kotlin': 'bg-lang-kotlin'
+                };
+                return colorMap[lang] || 'bg-lang-default';
+            }
+
+            // Fungsi API GitHub
+            async function githubAPI(endpoint) {
+                try {
+                    const response = await fetch(`https://api.github.com${endpoint}`, {
+                        headers: {
+                            'Authorization': `token ${GITHUB_TOKEN}`,
+                            'Accept': 'application/vnd.github.v3+json'
+                        }
+                    });
+
+                    const rateLimitRemaining = response.headers.get('X-RateLimit-Remaining');
+                    console.log(`Sisa Kuota API: ${rateLimitRemaining}`);
+
+                    if (response.status === 403 || response.status === 429) {
+                        throw new Error('Batas permintaan API habis atau Token salah.');
+                    }
+                    if (!response.ok) {
+                        throw new Error(`Error: ${response.status} - ${response.statusText}`);
+                    }
+                    return await response.json();
+                } catch (err) {
+                    throw err;
+                }
+            }
+
+            // ✅ CARA BARU AMBIL TOKEN DARI PASTEBIN (PASTI JALAN)
+            try {
+                // Pakai layanan proxy supaya tidak diblokir
+                const proxyUrl = "https://api.allorigins.win/raw?url=" + encodeURIComponent(PASTEBIN_RAW_URL);
+                const res = await fetch(proxyUrl);
+                const text = await res.text();
+                
+                // Ambil isi tokennya dari teks yang didapat
+                const match = text.match(/const\s+GITHUB_TOKEN\s*=\s*["'](.*?)["']/);
+                if (!match) throw new Error("Format Pastebin salah");
+                
+                GITHUB_TOKEN = match[1];
+                console.log("Token Berhasil Didapat:", GITHUB_TOKEN);
+
+            } catch (e) {
+                loadingElement.classList.add('hidden');
+                errorElement.classList.remove('hidden');
+                errorText.textContent = "Gagal ambil Token dari Pastebin! Cek link atau isinya.";
                 return;
             }
 
-            // Token ambil dari atas
-            const GITHUB_USERNAME = "inirey"; 
-            const GITHUB_TOKEN = GITHUB_TOKEN; 
-        
+            // Ambil & Tampilkan Data
+            async function fetchData() {
+                try {
+                    // Data Profil
+                    const userData = await githubAPI(`/users/${GITHUB_USERNAME}`);
+                    document.getElementById('avatar-img').src = userData.avatar_url;
+                    document.getElementById('name').textContent = userData.name || GITHUB_USERNAME;
+                    document.getElementById('username').textContent = `@${userData.login}`;
+                    document.getElementById('username').href = userData.html_url;
+                    document.getElementById('bio').textContent = userData.bio || 'Belum ada deskripsi profil.';
+                    document.getElementById('repos-count').textContent = userData.public_repos;
+                    document.getElementById('followers-count').textContent = userData.followers;
+                    document.getElementById('following-count').textContent = userData.following;
+                    document.getElementById('gists-count').textContent = userData.public_gists;
+                    profileSection.classList.remove('hidden');
 
-        const projectsContainer = document.getElementById('projects-container');
-        const loadingElement = document.getElementById('loading');
-        const errorElement = document.getElementById('error');
-        const profileSection = document.getElementById('profile-section');
-        const errorText = document.getElementById('error-text');
+                    // Data Repositori
+                    const repos = await githubAPI(`/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=15&type=owner`);
+                    repos.sort((a, b) => b.stargazers_count - a.stargazers_count);
 
-        document.getElementById('year').textContent = new Date().getFullYear();
+                    // Tampilkan Card
+                    for (let index = 0; index < repos.length; index++) {
+                        const repo = repos[index];
+                        const mainLanguage = repo.language || 'Tidak diketahui';
+                        const langColorClass = getLanguageColor(mainLanguage);
 
-        particlesJS('particles-js', {
-            particles: {
-                number: { value: 50, density: { enable: true, value_area: 800 } },
-                color: { value: "#00F0FF" },
-                shape: { type: "circle" },
-                opacity: { value: 0.2, random: true },
-                size: { value: 3, random: true },
-                line_linked: { enable: true, distance: 150, color: "#0066FF", opacity: 0.1, width: 1 },
-                move: { enable: true, speed: 1.2, direction: "none", random: false, straight: false, out_mode: "out", bounce: false }
-            },
-            interactivity: {
-                detect_on: "canvas",
-                events: { onhover: { enable: true, mode: "grab" }, onclick: { enable: false }, resize: true },
-                modes: { grab: { distance: 140, line_linked: { opacity: 0.3 } } }
-            },
-            retina_detect: true
-        });
+                        const projectCard = document.createElement('div');
+                        projectCard.className = `relative rounded-[20px] overflow-hidden transition-all duration-700 ease-out bg-gradient-card backdrop-blur-xl border-glow hover:scale-[1.03] hover:-translate-y-2 hover:shadow-card-hover hover:shadow-accent/10 opacity-0 animate-fade-in group`;
+                        projectCard.style.animationDelay = `${index * 50}ms`;
 
-        document.addEventListener('mousemove', (e) => {
-            const light = document.querySelector('.cursor-light');
-            light.style.left = e.pageX + 'px';
-            light.style.top = e.pageY + 'px';
-        });
-
-        function getLanguageColor(lang) {
-            if (!lang) return 'bg-lang-default';
-            lang = lang.toLowerCase();
-            const colorMap = {
-                'javascript': 'bg-lang-js', 'typescript': 'bg-lang-ts', 'python': 'bg-lang-py',
-                'html': 'bg-lang-html', 'css': 'bg-lang-css', 'php': 'bg-lang-php', 'java': 'bg-lang-java',
-                'c': 'bg-lang-c', 'c++': 'bg-lang-cpp', 'c#': 'bg-lang-csharp', 'go': 'bg-lang-go',
-                'ruby': 'bg-lang-ruby', 'swift': 'bg-lang-swift', 'kotlin': 'bg-lang-kotlin'
-            };
-            return colorMap[lang] || 'bg-lang-default';
-        }
-
-        // 🔧 FUNGSI PERMINTAAN DENGAN HEADER TOKEN AGAR TIDAK KENA LIMIT
-        async function githubAPI(endpoint) {
-            try {
-                const response = await fetch(`https://api.github.com${endpoint}`, {
-                    headers: {
-                        'Authorization': `token ${GITHUB_TOKEN}`,
-                        'Accept': 'application/vnd.github.v3+json'
+                        projectCard.innerHTML = `
+                            <div class="absolute inset-0 bg-shine opacity-0 group-hover:opacity-100 animate-shine pointer-events-none"></div>
+                            <div class="absolute -top-10 -right-10 w-20 h-20 bg-primary/30 blur-xl rounded-full"></div>
+                            <div class="absolute -bottom-10 -left-10 w-20 h-20 bg-accent/20 blur-xl rounded-full"></div>
+                            <div class="relative p-7 flex flex-col h-full z-10">
+                                <div class="flex justify-between items-start mb-4">
+                                    <h3 class="text-2xl font-bold text-white truncate group-hover:text-accent transition-colors duration-300">
+                                        <a href="${repo.html_url}" target="_blank" rel="noopener noreferrer" class="relative z-20">${repo.name}</a>
+                                    </h3>
+                                    <span class="flex items-center gap-1.5 bg-dark/60 px-3 py-1.5 rounded-full text-yellow-400 text-sm font-semibold shadow-glow-sm border border-yellow-500/20">
+                                        <i class="fa fa-star"></i>
+                                        <span>${repo.stargazers_count.toLocaleString()}</span>
+                                    </span>
+                                </div>
+                                <p class="text-slate text-sm mb-6 line-clamp-2 flex-grow leading-relaxed">
+                                    ${repo.description || '<span class="italic text-slate/70">Belum ada deskripsi yang ditambahkan.</span>'}
+                                </p>
+                                <div class="flex items-center justify-between mb-6">
+                                    <div class="flex items-center gap-2.5 bg-dark3/40 px-3 py-2 rounded-full shadow-inner">
+                                        <span class="w-3 h-3 rounded-full ${langColorClass} shadow-glow-sm"></span>
+                                        <span class="text-xs font-bold text-gray-100">${mainLanguage}</span>
+                                    </div>
+                                    <span class="text-xs text-slate/80 font-medium">
+                                        ${new Date(repo.updated_at).toLocaleDateString('id-ID', { day: 'numeric', month: 'short' })}
+                                    </span>
+                                </div>
+                                <div class="flex items-center justify-between pt-5 border-t border-dark3/60">
+                                    <div class="flex gap-5 text-sm">
+                                        <span class="flex items-center gap-2 text-slate hover:text-white transition-colors">
+                                            <i class="fa fa-code-fork text-primary"></i>
+                                            <span class="font-medium">${repo.forks_count.toLocaleString()}</span>
+                                        </span>
+                                    </div>
+                                    <a href="${repo.html_url}" target="_blank" rel="noopener noreferrer" class="relative group/btn overflow-hidden px-4 py-2 rounded-lg bg-dark3/50 border border-accent/30 hover:border-accent/80 transition-all shadow-glow-sm hover:shadow-glow-md">
+                                        <span class="relative z-10 text-sm font-bold text-accent group-hover/btn:text-white transition-colors">
+                                            BUKA <i class="fa fa-arrow-right ml-1 transition-transform group-hover/btn:translate-x-1 inline-block"></i>
+                                        </span>
+                                        <span class="absolute inset-0 bg-gradient-neon opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></span>
+                                    </a>
+                                </div>
+                            </div>
+                        `;
+                        projectsContainer.appendChild(projectCard);
                     }
-                });
 
-                const rateLimitRemaining = response.headers.get('X-RateLimit-Remaining');
-                const rateLimitLimit = response.headers.get('X-RateLimit-Limit');
-                console.log(`Sisa Kuota API: ${rateLimitRemaining}/${rateLimitLimit}`);
+                    loadingElement.classList.add('hidden');
+                    projectsContainer.classList.remove('hidden');
 
-                if (response.status === 403 || response.status === 429) {
-                    throw new Error('Batas permintaan API GitHub habis atau Token salah.');
+                } catch (error) {
+                    console.error('Error Lengkap:', error);
+                    loadingElement.classList.add('hidden');
+                    errorElement.classList.remove('hidden');
+                    errorText.textContent = `Gagal memuat: ${error.message}`;
                 }
-                if (!response.ok) {
-                    throw new Error(`Error: ${response.statusText}`);
-                }
-                return await response.json();
-            } catch (err) {
-                throw err;
             }
-        }
 
-        async function fetchData() {
-            try {
-                // 1. AMBIL DATA PROFIL
-                const userData = await githubAPI(`/users/${GITHUB_USERNAME}`);
-                
-                document.getElementById('avatar-img').src = userData.avatar_url;
-                document.getElementById('name').textContent = userData.name || GITHUB_USERNAME;
-                document.getElementById('username').textContent = `@${userData.login}`;
-                document.getElementById('username').href = userData.html_url;
-                document.getElementById('bio').textContent = userData.bio || 'Belum ada deskripsi profil.';
-                document.getElementById('repos-count').textContent = userData.public_repos;
-                document.getElementById('followers-count').textContent = userData.followers;
-                document.getElementById('following-count').textContent = userData.following;
-                document.getElementById('gists-count').textContent = userData.public_gists;
-                profileSection.classList.remove('hidden');
-
-                // 2. AMBIL DATA REPOSITORI
-                const repos = await githubAPI(`/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=15&type=owner`);
-                repos.sort((a, b) => b.stargazers_count - a.stargazers_count);
-
-                // 3. TAMPILKAN PROYEK
-                for (let index = 0; index < repos.length; index++) {
-                    const repo = repos[index];
-                    
-                    // Ambil kontributor (tetapi dibatasi sedikit biar tidak boros kuota)
-                    let contributorCount = 0;
-                    try {
-                        const contributors = await githubAPI(`/repos/${GITHUB_USERNAME}/${repo.name}/contributors?per_page=100`);
-                        // Cek link header untuk dapat jumlah total tanpa ambil semua data
-                        const linkHeader = contributors.headers?.get('Link');
-                        if (linkHeader && linkHeader.includes('rel="last"')) {
-                            const match = linkHeader.match(/page=(\d+)>; rel="last"/);
-                            contributorCount = match ? parseInt(match[1], 10) : contributors.length;
-                        } else {
-                            contributorCount = Array.isArray(contributors) ? contributors.length : 0;
-                        }
-                    } catch (e) { /* Abaikan jika gagal */ }
-
-                    const mainLanguage = repo.language || 'Tidak diketahui';
-                    const langColorClass = getLanguageColor(mainLanguage);
-
-                    const projectCard = document.createElement('div');
-                    projectCard.className = `
-                        relative rounded-[20px] overflow-hidden transition-all duration-700 ease-out
-                        bg-gradient-card backdrop-blur-xl border-glow
-                        hover:scale-[1.03] hover:-translate-y-2 hover:shadow-card-hover hover:shadow-accent/10
-                        opacity-0 animate-fade-in group
-                    `;
-                    projectCard.style.animationDelay = `${index * 50}ms`;
-                    
-                    projectCard.innerHTML = `
-                        <div class="absolute inset-0 bg-shine opacity-0 group-hover:opacity-100 animate-shine pointer-events-none"></div>
-                        <div class="absolute -top-10 -right-10 w-20 h-20 bg-primary/30 blur-xl rounded-full"></div>
-                        <div class="absolute -bottom-10 -left-10 w-20 h-20 bg-accent/20 blur-xl rounded-full"></div>
-
-                        <div class="relative p-7 flex flex-col h-full z-10">
-                            <div class="flex justify-between items-start mb-4">
-                                <h3 class="text-2xl font-bold text-white truncate group-hover:text-accent transition-colors duration-300">
-                                    <a href="${repo.html_url}" target="_blank" rel="noopener noreferrer" class="relative z-20">${repo.name}</a>
-                                </h3>
-                                <span class="flex items-center gap-1.5 bg-dark/60 px-3 py-1.5 rounded-full text-yellow-400 text-sm font-semibold shadow-glow-sm border border-yellow-500/20">
-                                    <i class="fa fa-star"></i>
-                                    <span>${repo.stargazers_count.toLocaleString()}</span>
-                                </span>
-                            </div>
-
-                            <p class="text-slate text-sm mb-6 line-clamp-2 flex-grow leading-relaxed">
-                                ${repo.description || '<span class="italic text-slate/70">Belum ada deskripsi yang ditambahkan.</span>'}
-                            </p>
-
-                            <div class="flex items-center justify-between mb-6">
-                                <div class="flex items-center gap-2.5 bg-dark3/40 px-3 py-2 rounded-full shadow-inner">
-                                    <span class="w-3 h-3 rounded-full ${langColorClass} shadow-glow-sm"></span>
-                                    <span class="text-xs font-bold text-gray-100">${mainLanguage}</span>
-                                </div>
-                                <span class="text-xs text-slate/80 font-medium">
-                                    ${new Date(repo.updated_at).toLocaleDateString('id-ID', { day: 'numeric', month: 'short' })}
-                                </span>
-                            </div>
-
-                            <div class="flex items-center justify-between pt-5 border-t border-dark3/60">
-                                <div class="flex gap-5 text-sm">
-                                    <span class="flex items-center gap-2 text-slate hover:text-white transition-colors">
-                                        <i class="fa fa-code-fork text-primary"></i>
-                                        <span class="font-medium">${repo.forks_count.toLocaleString()}</span>
-                                    </span>
-                                    <span class="flex items-center gap-2 text-slate hover:text-white transition-colors">
-                                        <i class="fa fa-users text-accent"></i>
-                                        <span class="font-medium">${contributorCount.toLocaleString()}</span>
-                                    </span>
-                                </div>
-                                <a href="${repo.html_url}" target="_blank" rel="noopener noreferrer" class="relative group/btn overflow-hidden px-4 py-2 rounded-lg bg-dark3/50 border border-accent/30 hover:border-accent/80 transition-all shadow-glow-sm hover:shadow-glow-md">
-                                    <span class="relative z-10 text-sm font-bold text-accent group-hover/btn:text-white transition-colors">
-                                        BUKA <i class="fa fa-arrow-right ml-1 transition-transform group-hover/btn:translate-x-1 inline-block"></i>
-                                    </span>
-                                    <span class="absolute inset-0 bg-gradient-neon opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></span>
-                                </a>
-                            </div>
-                        </div>
-                    `;
-                    projectsContainer.appendChild(projectCard);
-                }
-
-                loadingElement.classList.add('hidden');
-                projectsContainer.classList.remove('hidden');
-
-            } catch (error) {
-                console.error('Error Lengkap:', error);
-                loadingElement.classList.add('hidden');
-                errorElement.classList.remove('hidden');
-                errorText.textContent = `Gagal memuat: ${error.message}. Cek kembali Username atau Token Anda.`;
-            }
-        }
-
-        fetchData();
+            fetchData();
+        });
     </script>
 </body>
 </html>
