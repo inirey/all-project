@@ -1,4 +1,4 @@
-# 🚀 Reyns.my.id | Portofolio Kode & Proyek
+# 🚀 Portofolio Kode & Proyek
 
 > Halaman portofolio pribadi yang menampilkan seluruh proyek, repositori, dan karya kode secara otomatis langsung dari akun GitHub. Dibangun dengan tampilan modern, gelap, dan bernuansa teknologi.
 
