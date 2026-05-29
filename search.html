@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cek Profil GitHub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        dark: '#050A18',
+                        secondary: '#0F172A',
+                        accent: '#00F0FF',
+                        primary: '#0066FF',
+                        hoverAccent: '#0099FF',
+                        textLight: '#E2E8F0',
+                        terminal: '#39FF14',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        mono: ['Courier New', 'Courier', 'monospace'],
+                    },
+                    boxShadow: {
+                        'glow-blue': '0 0 15px rgba(0, 102, 255, 0.5), 0 0 30px rgba(0, 153, 255, 0.2)',
+                        'glow-cyan': '0 0 15px rgba(0, 240, 255, 0.5), 0 0 30px rgba(0, 240, 255, 0.2)',
+                    },
+                    animation: {
+                        'terminal-blink': 'blink 1s step-end infinite',
+                        'text-glow': 'textGlow 2s ease-in-out infinite alternate',
+                        'float': 'float 6s ease-in-out infinite',
+                        'scan': 'scan 2s linear infinite',
+                        'typing': 'typing 3s steps(40, end)',
+                    },
+                    keyframes: {
+                        blink: {
+                            '0%, 100%': { opacity: '1' },
+                            '50%': { opacity: '0' },
+                        },
+                        textGlow: {
+                            '0%': { textShadow: '0 0 5px #00F0FF, 0 0 10px #0066FF' },
+                            '100%': { textShadow: '0 0 10px #00F0FF, 0 0 20px #0066FF, 0 0 30px #00F0FF' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                        scan: {
+                            '0%': { transform: 'translateY(-100%)' },
+                            '100%': { transform: 'translateY(400%)' },
+                        },
+                        typing: {
+                            'from': { width: '0' },
+                            'to': { width: '100%' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .scrollbar-hide {
+                -ms-overflow-style: none;
+                scrollbar-width: none;
+            }
+            .scrollbar-hide::-webkit-scrollbar {
+                display: none;
+            }
+            .btn-gradient {
+                background: linear-gradient(135deg, #0066FF 0%, #00F0FF 100%);
+            }
+            .btn-gradient:hover {
+                background: linear-gradient(135deg, #0099FF 0%, #00F0FF 100%);
+            }
+            .card-hover {
+                transition: all 0.4s ease;
+            }
+            .text-shadow {
+                text-shadow: 0 0 8px rgba(0, 240, 255, 0.6);
+            }
+            .terminal-bg {
+                background: rgba(5, 10, 24, 0.85);
+                border: 1px solid #00F0FF;
+                box-shadow: inset 0 0 20px rgba(0, 240, 255, 0.1), 0 0 15px rgba(0, 102, 255, 0.3);
+            }
+            .typing-container {
+                overflow: hidden;
+                white-space: nowrap;
+                border-right: 2px solid #39FF14;
+                animation: typing 2s steps(30) forwards, terminal-blink 1s infinite;
+            }
+        }
+
+        body {
+            background: #050A18;
+            background-image: 
+                radial-gradient(circle at 0% 0%, rgba(0, 102, 255, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 100% 0%, rgba(0, 240, 255, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 100% 100%, rgba(0, 102, 255, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 0% 100%, rgba(0, 240, 255, 0.1) 0%, transparent 40%);
+            background-attachment: fixed;
+            overflow-x: hidden;
+        }
+
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;
+        }
+    </style>
+</head>
+<body class="text-textLight font-sans min-h-screen relative">
+    <!-- Latar Belakang Partikel -->
+    <div id="particles-js"></div>
+
+    <div class="container mx-auto px-4 py-12 max-w-5xl relative z-10">
+        <!-- Header -->
+        <div class="text-center mb-12 animate-float">
+            <h1 class="text-[clamp(2rem,5vw,3.5rem)] font-bold text-white mb-3 animate-text-glow tracking-wider">
+                <span class="text-accent">&lt;</span> Cek Profil GitHub <span class="text-accent">/&gt;</span>
+            </h1>
+            <p class="text-textLight/80 text-lg font-mono">// Masukkan username untuk memindai data profil</p>
+        </div>
+
+        <!-- Search Box -->
+        <div class="max-w-2xl mx-auto mb-16 relative">
+            <div class="flex flex-col sm:flex-row gap-3 items-center bg-secondary/80 backdrop-blur-lg p-4 rounded-xl shadow-glow-blue border border-accent/30 hover:border-accent/60 transition-all duration-500">
+                <div class="relative w-full group">
+                    <i class="fa fa-github absolute left-4 top-1/2 -translate-y-1/2 text-accent text-lg transition-all duration-300 group-hover:scale-110"></i>
+                    <input 
+                        type="text" 
+                        id="usernameInput" 
+                        placeholder="root@github:~# masukkan_username" 
+                        class="w-full bg-dark/70 border border-primary/50 rounded-lg py-3.5 px-11 focus:outline-none focus:ring-2 focus:ring-accent/70 focus:border-accent transition-all duration-300 text-lg font-mono placeholder-text-textLight/40"
+                    >
+                    <div class="absolute h-[2px] w-0 bg-gradient-to-r from-primary to-accent bottom-0 left-0 transition-all duration-500 group-focus-within:w-full"></div>
+                </div>
+                <button id="searchBtn" class="btn-gradient w-full sm:w-auto px-8 py-3.5 rounded-lg font-semibold text-white shadow-glow-blue hover:shadow-glow-cyan transform hover:-translate-y-1 active:translate-y-0 transition-all duration-300 whitespace-nowrap relative overflow-hidden group">
+                    <span class="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+                    <i class="fa fa-terminal mr-2"></i> SCAN DATA
+                </button>
+            </div>
+            
+            <!-- Loading Indicator - Tampilan Terminal Coding -->
+            <div id="loading" class="hidden absolute left-1/2 -translate-x-1/2 mt-6 w-full max-w-md">
+                <div class="terminal-bg rounded-lg p-4 font-mono text-sm text-terminal relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-accent to-transparent animate-scan"></div>
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="text-accent">root@scan:~#</span>
+                        <span id="typing-text" class="typing-container">memuat_data_profil.sh</span>
+                        <span class="animate-terminal-blink">_</span>
+                    </div>
+                    <div class="pl-4 text-textLight/80 text-xs space-y-1 mt-3">
+                        <div class="flex items-center gap-2"><span class="text-accent">[+]</span> Mengambil data pengguna...</div>
+                        <div class="flex items-center gap-2"><span class="text-accent">[+]</span> Memindai repositori...</div>
+                        <div class="flex items-center gap-2"><span class="text-accent">[+]</span> Menganalisis statistik...</div>
+                    </div>
+                    <div class="mt-3 h-1.5 w-full bg-dark rounded-full overflow-hidden">
+                        <div class="h-full bg-gradient-to-r from-primary to-accent rounded-full animate-pulse-slow" style="width: 75%;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Result Area -->
+        <div id="result" class="hidden transition-all duration-700 opacity-0 translate-y-8">
+            <!-- Profile Card -->
+            <div id="profileCard" class="bg-secondary/80 backdrop-blur-xl rounded-2xl p-8 shadow-glow-blue border border-primary/30 mb-8 card-hover hover:border-accent/50 hover:shadow-glow-cyan group">
+                <div class="flex flex-col md:flex-row gap-8 items-center md:items-start">
+                    <div class="relative">
+                        <div class="absolute -inset-2 bg-gradient-to-r from-primary to-accent rounded-full opacity-40 blur-md animate-pulse-slow"></div>
+                        <img id="avatar" src="" alt="Avatar Profil" class="relative w-36 h-36 rounded-full object-cover border-4 border-dark shadow-xl">
+                        <div class="absolute bottom-2 right-2 w-5 h-5 bg-terminal rounded-full border-2 border-dark"></div>
+                    </div>
+                    <div class="text-center md:text-left flex-1">
+                        <h2 id="name" class="text-3xl font-bold text-white mb-2 text-shadow"></h2>
+                        <p id="login" class="text-accent/90 text-lg mb-4 font-mono">~/profil/</p>
+                        <p id="bio" class="text-textLight mb-5 max-w-2xl leading-relaxed"></p>
+                        <div class="flex flex-wrap justify-center md:justify-start gap-6 text-sm">
+                            <div class="flex items-center gap-2 bg-dark/50 px-3 py-2 rounded-lg border border-primary/20 hover:border-accent/40 transition-all">
+                                <i class="fa fa-book text-accent text-lg"></i>
+                                <span><span id="reposCount" class="font-bold text-white text-lg"></span> <span class="text-xs">Repositori</span></span>
+                            </div>
+                            <div class="flex items-center gap-2 bg-dark/50 px-3 py-2 rounded-lg border border-primary/20 hover:border-accent/40 transition-all">
+                                <i class="fa fa-users text-accent text-lg"></i>
+                                <span><span id="followersCount" class="font-bold text-white text-lg"></span> <span class="text-xs">Pengikut</span></span>
+                            </div>
+                            <div class="flex items-center gap-2 bg-dark/50 px-3 py-2 rounded-lg border border-primary/20 hover:border-accent/40 transition-all">
+                                <i class="fa fa-user-plus text-accent text-lg"></i>
+                                <span><span id="followingCount" class="font-bold text-white text-lg"></span> <span class="text-xs">Mengikuti</span></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Repositories Section -->
+            <div id="reposSection" class="mt-12">
+                <h3 class="text-2xl font-bold text-white mb-6 border-b border-primary/30 pb-3 flex items-center gap-3">
+                    <i class="fa fa-code-branch text-accent"></i>
+                    <span class="text-shadow">Daftar Repositori</span>
+                    <span class="text-xs text-accent/70 font-mono ml-auto">/* Kode Sumber */</span>
+                </h3>
+                <div id="reposList" class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <!-- Repos will be inserted here by JS -->
+                </div>
+            </div>
+
+            <!-- Error Message -->
+            <div id="errorMsg" class="hidden text-center py-16 text-red-400 relative">
+                <div class="absolute inset-0 bg-red-900/10 rounded-xl"></div>
+                <i class="fa fa-exclamation-triangle text-5xl mb-4 text-red-500/80"></i>
+                <p class="text-xl font-mono">ERROR: Data tidak ditemukan</p>
+                <p class="text-sm text-red-400/70 mt-2">// Username salah atau koneksi terputus</p>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="text-center text-textLight/50 text-sm mt-20 font-mono">
+            <p>/* © 2026 Dibuat dengan <span class="text-accent">❤</span> oleh Rey | reyns.my.id | SYSTEM: ACTIVE */</p>
+        </div>
+    </div>
+
+    <script>
+        const usernameInput = document.getElementById('usernameInput');
+        const searchBtn = document.getElementById('searchBtn');
+        const resultDiv = document.getElementById('result');
+        const loadingDiv = document.getElementById('loading');
+        const profileCard = document.getElementById('profileCard');
+        const reposSection = document.getElementById('reposSection');
+        const errorMsg = document.getElementById('errorMsg');
+        const reposList = document.getElementById('reposList');
+
+        // Event Listeners
+        searchBtn.addEventListener('click', fetchGitHubData);
+        usernameInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') fetchGitHubData();
+        });
+
+        // Inisialisasi Partikel yang bergerak mengikuti kursor/gerakan HP
+        particlesJS('particles-js', {
+            particles: {
+                number: { value: 80, density: { enable: true, value_area: 800 } },
+                color: { value: ["#0066FF", "#00F0FF"] },
+                shape: { type: "circle" },
+                opacity: { value: 0.5, random: true, anim: { enable: true, speed: 1, opacity_min: 0.1 } },
+                size: { value: 3, random: true, anim: { enable: true, speed: 2, size_min: 0.1 } },
+                line_linked: { enable: true, distance: 150, color: "#0066FF", opacity: 0.2, width: 1 },
+                move: { 
+                    enable: true, 
+                    speed: 2, 
+                    direction: "none", 
+                    random: false, 
+                    straight: false, 
+                    out_mode: "out", 
+                    bounce: false,
+                    attract: { enable: true, rotateX: 600, rotateY: 1200 }
+                }
+            },
+            interactivity: {
+                detect_on: "window",
+                events: {
+                    onhover: { enable: true, mode: "grab" },
+                    onclick: { enable: true, mode: "push" },
+                    onmousemove: { enable: true },
+                    resize: true
+                },
+                modes: {
+                    grab: { distance: 200, line_linked: { opacity: 0.5 } },
+                    push: { particles_nb: 4 }
+                }
+            },
+            retina_detect: true
+        });
+
+        // Efek gerakan pada HP (gyroscope)
+        if (window.DeviceOrientationEvent) {
+            window.addEventListener('deviceorientation', function(e) {
+                const particles = document.getElementById('particles-js');
+                if (particles) {
+                    const tiltX = e.gamma / 10;
+                    const tiltY = e.beta / 10;
+                    particles.style.transform = `translate(${tiltX}px, ${tiltY}px)`;
+                }
+            });
+        }
+
+        async function fetchGitHubData() {
+            const username = usernameInput.value.trim();
+            if (!username) return;
+
+            // Reset state
+            resultDiv.classList.remove('opacity-100', 'translate-y-0');
+            resultDiv.classList.add('opacity-0', 'translate-y-8');
+            errorMsg.classList.add('hidden');
+            profileCard.classList.remove('hidden');
+            reposSection.classList.remove('hidden');
+            loadingDiv.classList.remove('hidden');
+            
+            // Efek mengetik ulang
+            const typingText = document.getElementById('typing-text');
+            typingText.style.animation = 'none';
+            setTimeout(() => {
+                typingText.style.animation = 'typing 2s steps(30) forwards, terminal-blink 1s infinite';
+            }, 10);
+
+            try {
+                // Simulasi waktu loading agar animasi terminal terlihat jelas
+                await new Promise(resolve => setTimeout(resolve, 2500));
+
+                // Fetch Profile Data
+                const profileRes = await fetch(`https://api.github.com/users/${username}`);
+                if (!profileRes.ok) throw new Error('User not found');
+                const profileData = await profileRes.json();
+
+                // Fetch Repositories Data
+                const reposRes = await fetch(`https://api.github.com/users/${username}/repos?sort=updated`);
+                const reposData = await reposRes.json();
+
+                // Update Profile UI
+                document.getElementById('avatar').src = profileData.avatar_url;
+                document.getElementById('name').textContent = profileData.name || 'Nama Tidak Tersedia';
+                document.getElementById('login').textContent = `@${profileData.login}`;
+                document.getElementById('bio').textContent = profileData.bio || '// Tidak ada deskripsi yang dituliskan';
+                document.getElementById('reposCount').textContent = profileData.public_repos;
+                document.getElementById('followersCount').textContent = profileData.followers;
+                document.getElementById('followingCount').textContent = profileData.following;
+
+                // Update Repositories UI
+                reposList.innerHTML = '';
+                if (reposData.length === 0) {
+                    reposList.innerHTML = '<p class="col-span-2 text-center py-10 text-textLight/70 font-mono">> ls: tidak ada file atau repositori</p>';
+                } else {
+                    reposData.forEach((repo, index) => {
+                        const repoCard = document.createElement('div');
+                        repoCard.className = 'bg-secondary/70 backdrop-blur-sm rounded-lg p-5 border border-primary/30 hover:border-accent/60 card-hover hover:shadow-glow-blue hover:-translate-y-1 opacity-0 animate-fade-in';
+                        repoCard.style.animationDelay = `${index * 100}ms`;
+                        repoCard.innerHTML = `
+                            <a href="${repo.html_url}" target="_blank" rel="noopener noreferrer" class="block h-full relative overflow-hidden group">
+                                <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary/50 to-accent/50 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
+                                <h4 class="text-accent font-semibold text-lg mb-2 truncate flex items-center gap-2">
+                                    <i class="fa fa-file-code-o text-sm"></i> ${repo.name}
+                                </h4>
+                                <p class="text-textLight/70 text-sm mb-4 line-clamp-2 h-10">${repo.description || '/* Tidak ada deskripsi */'}</p>
+                                <div class="flex items-center gap-4 text-xs text-textLight/60 mt-auto pt-3 border-t border-primary/20">
+                                    <span class="flex items-center gap-1 bg-dark/40 px-2 py-1 rounded"><i class="fa fa-code-fork text-primary"></i> ${repo.forks_count}</span>
+                                    <span class="flex items-center gap-1 bg-dark/40 px-2 py-1 rounded"><i class="fa fa-star text-yellow-400"></i> ${repo.stargazers_count}</span>
+                                    ${repo.language ? `<span class="px-2 py-0.5 bg-gradient-to-r from-primary/20 to-accent/20 rounded font-mono">${repo.language}</span>` : ''}
+                                </div>
+                            </a>
+                        `;
+                        reposList.appendChild(repoCard);
+                    });
+                }
+
+                // Tampilkan Hasil dengan Animasi
+                loadingDiv.classList.add('hidden');
+                resultDiv.classList.remove('hidden');
+                setTimeout(() => {
+                    resultDiv.classList.add('opacity-100', 'translate-y-0');
+                }, 100);
+
+            } catch (err) {
+                loadingDiv.classList.add('hidden');
+                resultDiv.classList.remove('hidden');
+                setTimeout(() => {
+                    errorMsg.classList.remove('hidden');
+                    profileCard.classList.add('hidden');
+                    reposSection.classList.add('hidden');
+                    resultDiv.classList.add('opacity-100', 'translate-y-0');
+                }, 400);
+            }
+        }
+    </script>
+</body>
+</html>
